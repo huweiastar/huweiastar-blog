@@ -100,3 +100,19 @@ apps/*/public/sitemap.xml
 apps/*/public/rss.xml
 apps/*/public/knowledge-index.json
 apps/*/dist/
+
+# ── backend（FastAPI）──
+backend/venv/
+backend/uploads/
+backend/**/*.pyc
+backend/**/__pycache__/
+backend/*.db
+backend/*.db-*
+backend/admin/dist/
+
+# ── frontend（Next.js 独立前端）──
+frontend/.next/
+frontend/.next.bak*/
+frontend/.next.build/
+frontend/.next.old/
+frontend/tsconfig.tsbuildinfo
