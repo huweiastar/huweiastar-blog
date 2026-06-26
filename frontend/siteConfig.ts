@@ -5,7 +5,7 @@ export const siteConfig = {
   title: "HuWeiの小站",
   url: "https://blog.huweiastar.cn",
   authorName: "HuWei",
-  bio: "项目开源在 GitHub,点击下面的GitHub图标跳转,欢迎 star 和 fork！(◕‿◕)",
+  bio: "",
 
   // 头像设置
   avatarUrl: "/images/hong.jpg",
@@ -54,12 +54,12 @@ export const siteConfig = {
     { name: "Tailwind 4", color: "text-teal-400" },
   ],
   icpConfig: {
-    name: "赣ICP备2025078417号",
+    name: "",
     link: "https://beian.miit.gov.cn/",
   },
   moeIcpConfig: {
-    name: "萌ICP备20260527号",
-    link: "https://icp.gov.moe/?keyword=20260527",
+    name: "",
+    link: "https://icp.gov.moe/",
   },
 
   // 分类标题

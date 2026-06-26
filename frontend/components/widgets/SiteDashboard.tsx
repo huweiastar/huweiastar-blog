@@ -11,6 +11,10 @@ export default function SiteDashboard() {
     name: siteConfig.icpConfig?.name,
     link: siteConfig.icpConfig?.link,
   });
+  const [moeIcp, setMoeIcp] = useState<{ name?: string; link?: string }>({
+    name: siteConfig.moeIcpConfig?.name,
+    link: siteConfig.moeIcpConfig?.link,
+  });
 
   // 备案信息优先读后台站点配置，缺省回退静态值
   useEffect(() => {
@@ -20,6 +24,11 @@ export default function SiteDashboard() {
           setIcp({
             name: cfg.icp_number,
             link: cfg.icp_link || siteConfig.icpConfig?.link,
+          });
+        if (cfg?.moe_icp_number)
+          setMoeIcp({
+            name: cfg.moe_icp_number,
+            link: cfg.moe_icp_link || siteConfig.moeIcpConfig?.link,
           });
       })
       .catch(() => {});
@@ -84,14 +93,14 @@ export default function SiteDashboard() {
               {icp.name}
             </a>
           )}
-          {siteConfig.moeIcpConfig?.name && (
+          {moeIcp.name && (
             <a
-              href={siteConfig.moeIcpConfig.link}
+              href={moeIcp.link}
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-indigo-500 transition-colors border-b border-dashed border-slate-400 dark:border-slate-500 pb-0.5"
             >
-              {siteConfig.moeIcpConfig.name}
+              {moeIcp.name}
             </a>
           )}
         </div>

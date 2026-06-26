@@ -24,7 +24,7 @@ export default function KiraSparkle() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const sparkles = useRef<Sparkle[]>([]);
   const animFrame = useRef<number>(0);
-  const disabled = pathname?.startsWith("/garden/") || !sparkleEffect;
+  const disabled = pathname?.startsWith("/garden/") || pathname?.startsWith("/admin") || !sparkleEffect;
 
   useEffect(() => {
     if (disabled) return;
@@ -90,10 +90,22 @@ export default function KiraSparkle() {
       }
     };
 
+    const handleClick = (e: MouseEvent) => {
+      spawnAt(e.clientX, e.clientY);
+    };
+
+    const handleTouch = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        spawnAt(e.touches[0].clientX, e.touches[0].clientY);
+      }
+    };
+
     const onMouseUp = () => setTimeout(handleSelection, 0);
 
     window.addEventListener("mouseup", onMouseUp);
     window.addEventListener("touchend", onMouseUp);
+    window.addEventListener("click", handleClick);
+    window.addEventListener("touchstart", handleTouch, { passive: true });
 
     const loop = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -137,6 +149,8 @@ export default function KiraSparkle() {
       window.removeEventListener("resize", resize);
       window.removeEventListener("mouseup", onMouseUp);
       window.removeEventListener("touchend", onMouseUp);
+      window.removeEventListener("click", handleClick);
+      window.removeEventListener("touchstart", handleTouch);
       cancelAnimationFrame(animFrame.current);
     };
   }, [disabled]);

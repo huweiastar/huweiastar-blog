@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import SearchBar from "@/components/ui/SearchBar";
 import ProfileCard from "@/components/home/ProfileCard";
+import QuoteCard from "@/components/home/QuoteCard";
 import FadeIn from "@/components/ui/FadeIn";
 
 const LatestPostsCarousel = dynamic(() => import("@/components/home/LatestPostsCarousel"), { ssr: false });
@@ -33,16 +34,21 @@ export default function HomeClient({
       </FadeIn>
 
       <main className="flex flex-col gap-4 md:gap-6 w-full">
-        {/* 第一行：个人信息 + 名言（合并在一个大卡片内） */}
+        {/* 第一行：个人信息卡片 + 名言卡片 */}
         <FadeIn delay={0.1}>
-          <div className="w-full">
-            <ProfileCard
-              postCount={postCount}
-              chatterCount={chatterCount}
-              photoCount={photoCount}
-              projectCount={projectCount}
-              pvCount={pvCount}
-            />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 w-full">
+            <div className="md:col-span-2">
+              <ProfileCard
+                postCount={postCount}
+                chatterCount={chatterCount}
+                photoCount={photoCount}
+                projectCount={projectCount}
+                pvCount={pvCount}
+              />
+            </div>
+            <div className="md:col-span-1 flex flex-col">
+              <QuoteCard />
+            </div>
           </div>
         </FadeIn>
 

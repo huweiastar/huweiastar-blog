@@ -1,26 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Quote } from "lucide-react";
 import { siteConfig } from "@/siteConfig";
-
-const QUOTES = [
-  { text: "世界上只有一种真正的英雄主义，那就是在认清生活的真相后依然热爱生活。", author: "罗曼·罗兰" },
-  { text: "不要因为走得太远，而忘记当初为什么出发。", author: "纪伯伦" },
-  { text: "我们都在阴沟里，但仍有人仰望星空。", author: "王尔德" },
-  { text: "一个人至少拥有一个梦想，有一个理由去坚强。", author: "三毛" },
-  { text: "愿你一生努力，一生被爱，想要的都拥有，得不到的都释怀。", author: "八月长安" },
-  { text: "生活不是等待暴风雨过去，而是要学会在雨中跳舞。", author: "维维安·格林" },
-  { text: "我走得很慢，但我从不后退。", author: "林肯" },
-  { text: "凡是过往，皆为序章。", author: "莎士比亚" },
-  { text: "黑夜给了我黑色的眼睛，我却用它寻找光明。", author: "顾城" },
-  { text: "人生没有彩排，每一天都是现场直播。", author: "佚名" },
-  { text: "当你凝视深渊时，深渊也在凝视你。", author: "尼采" },
-  { text: "所有的大人都曾经是小孩，虽然只有少数人记得。", author: "圣埃克苏佩里" },
-  { text: "种一棵树最好的时间是十年前，其次是现在。", author: "非洲谚语" },
-  { text: "但行好事，莫问前程。", author: "古训" },
-];
 
 export default function ProfileCard({
   postCount = 0,
@@ -35,122 +15,67 @@ export default function ProfileCard({
   projectCount?: number;
   pvCount?: number;
 }) {
-  const [quoteIndex, setQuoteIndex] = useState(() => Math.floor(Math.random() * QUOTES.length));
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setQuoteIndex((i) => (i + 1) % QUOTES.length);
-    }, 10000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const quote = QUOTES[quoteIndex];
-
   return (
-    <div className="rounded-3xl bg-white/40 dark:bg-slate-800/50 backdrop-blur-md border border-white/40 dark:border-white/10 shadow-xl p-5 md:p-8 transition-all duration-700 group relative overflow-hidden w-full min-h-[200px] md:min-h-[280px]">
+    <div className="rounded-3xl bg-white/40 dark:bg-slate-800/50 backdrop-blur-md border border-white/40 dark:border-white/10 shadow-xl p-5 md:p-8 transition-all duration-700 group relative overflow-hidden w-full">
       {/* 装饰光斑 */}
       <div className="absolute -top-20 -right-20 w-48 h-48 bg-indigo-400/10 dark:bg-indigo-400/5 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="flex flex-col md:flex-row gap-6 md:gap-8 relative z-10 h-full">
-        {/* 左侧 2/3：个人信息 + 数据 */}
-        <div className="md:w-2/3 flex flex-col justify-between">
-          <div className="flex items-start gap-4 md:gap-6">
-            <div className="flex-shrink-0">
-              <div className="w-16 h-16 md:w-24 md:h-24 rounded-full bg-gradient-to-tr from-sky-400 via-indigo-400 to-purple-400 p-[3px] shadow-lg transition-all duration-500 hover:shadow-xl hover:scale-110 hover:rotate-6 cursor-pointer">
-                <img
-                  src={siteConfig.avatarUrl}
-                  alt="avatar"
-                  className="w-full h-full rounded-full object-cover bg-white dark:bg-slate-800"
-                />
-              </div>
+      <div className="relative z-10">
+        <div className="flex items-start gap-4 md:gap-6">
+          <div className="flex-shrink-0">
+            <div className="w-16 h-16 md:w-24 md:h-24 rounded-full bg-gradient-to-tr from-sky-400 via-indigo-400 to-purple-400 p-[3px] shadow-lg transition-all duration-500 hover:shadow-xl hover:scale-110 hover:rotate-6 cursor-pointer">
+              <img
+                src={siteConfig.avatarUrl}
+                alt="avatar"
+                className="w-full h-full rounded-full object-cover bg-white dark:bg-slate-800"
+              />
             </div>
-            <div>
-              <h1 className="text-xl md:text-3xl font-bold text-slate-900 dark:text-white mb-1 md:mb-2 tracking-wider transition-colors duration-700">
-                {siteConfig.authorName}
-              </h1>
+          </div>
+          <div>
+            <h1 className="text-xl md:text-3xl font-bold text-slate-900 dark:text-white mb-1 md:mb-2 tracking-wider transition-colors duration-700">
+              {siteConfig.authorName}
+            </h1>
+            {siteConfig.bio && (
               <p className="text-sm md:text-base text-slate-700 dark:text-slate-300 font-medium leading-relaxed max-w-md transition-colors duration-700">
                 {siteConfig.bio}
               </p>
-            </div>
-          </div>
-
-          <div className="flex flex-col md:flex-row items-end md:items-center justify-between mt-4 md:mt-8 gap-4 md:gap-6">
-            <div className="flex gap-4 md:gap-6 w-full md:w-auto justify-around md:justify-start flex-wrap">
-              <StatItem count={postCount} label="文章" color="text-indigo-600 dark:text-indigo-400" />
-              <div className="w-px h-10 bg-slate-300/50 dark:bg-slate-700 hidden md:block" />
-              <StatItem count={chatterCount} label="说说" color="text-purple-600 dark:text-purple-400" />
-              <div className="w-px h-10 bg-slate-300/50 dark:bg-slate-700 hidden md:block" />
-              <StatItem count={photoCount} label="照片" color="text-pink-600 dark:text-pink-400" />
-              <div className="w-px h-10 bg-slate-300/50 dark:bg-slate-700 hidden md:block" />
-              <StatItem count={projectCount} label="项目" color="text-emerald-600 dark:text-emerald-400" />
-              <div className="w-px h-10 bg-slate-300/50 dark:bg-slate-700 hidden md:block" />
-              <StatItem count={pvCount} label="访问" color="text-amber-600 dark:text-amber-400" />
-            </div>
-
-            <div className="flex gap-3 flex-wrap justify-end">
-              {siteConfig.social?.github && (
-                <SocialBtn type="github" url={siteConfig.social.github} />
-              )}
-              {siteConfig.social?.gitee && (
-                <SocialBtn type="gitee" url={siteConfig.social.gitee} />
-              )}
-              {siteConfig.social?.email && (
-                <SocialBtn type="email" url={`mailto:${siteConfig.social.email}`} />
-              )}
-              {siteConfig.social?.qq && (
-                <SocialBtn type="qq" url={`tencent://message/?uin=${siteConfig.social.qq}`} />
-              )}
-              {siteConfig.social?.wechat && (
-                <SocialBtn type="wechat" />
-              )}
-            </div>
+            )}
           </div>
         </div>
 
-        {/* 右侧 1/3：名言 */}
-        <div className="md:w-1/3 flex flex-col justify-center md:border-l md:border-slate-300/30 dark:md:border-slate-700/50 md:pl-6 md:py-2">
-          <div className="flex items-start gap-2 md:gap-3">
-            <div className="flex-shrink-0 mt-0.5">
-              <div className="w-8 h-8 md:w-10 md:h-10 rounded-xl bg-gradient-to-br from-indigo-500/20 to-sky-500/20 dark:from-indigo-400/30 dark:to-sky-400/30 backdrop-blur-sm border border-white/40 dark:border-white/10 flex items-center justify-center shadow-sm">
-                <Quote className="w-4 h-4 md:w-5 md:h-5 text-indigo-600 dark:text-indigo-400" strokeWidth={2.2} />
-              </div>
-            </div>
-            <div className="flex-1 min-w-0">
-              <div className="relative min-h-[60px] md:min-h-[80px]">
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={quoteIndex}
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -8 }}
-                    transition={{ duration: 0.5, ease: "easeInOut" }}
-                  >
-                    <p className="text-xs md:text-sm text-slate-700 dark:text-slate-200 font-medium leading-relaxed">
-                      {quote.text}
-                    </p>
-                    <p className="text-[10px] md:text-xs text-slate-500 dark:text-slate-400 mt-1.5 md:mt-2 text-right">
-                      —— {quote.author}
-                    </p>
-                  </motion.div>
-                </AnimatePresence>
-              </div>
-            </div>
+        <div className="flex flex-col md:flex-row items-end md:items-center justify-between mt-4 md:mt-6 gap-4 md:gap-6">
+          <div className="flex gap-4 md:gap-6 w-full md:w-auto justify-around md:justify-start flex-wrap">
+            <StatItem count={postCount} label="文章" color="text-indigo-600 dark:text-indigo-400" />
+            <div className="w-px h-10 bg-slate-300/50 dark:bg-slate-700 hidden md:block" />
+            <StatItem count={chatterCount} label="说说" color="text-purple-600 dark:text-purple-400" />
+            <div className="w-px h-10 bg-slate-300/50 dark:bg-slate-700 hidden md:block" />
+            <StatItem count={photoCount} label="照片" color="text-pink-600 dark:text-pink-400" />
+            {projectCount > 0 && (
+              <>
+                <div className="w-px h-10 bg-slate-300/50 dark:bg-slate-700 hidden md:block" />
+                <StatItem count={projectCount} label="项目" color="text-emerald-600 dark:text-emerald-400" />
+              </>
+            )}
+            <div className="w-px h-10 bg-slate-300/50 dark:bg-slate-700 hidden md:block" />
+            <StatItem count={pvCount} label="访问" color="text-amber-600 dark:text-amber-400" />
           </div>
-          {/* 进度指示点 */}
-          <div className="flex justify-center gap-0.5 mt-3 md:mt-4">
-            {QUOTES.map((_, i) => (
-              <button
-                key={i}
-                type="button"
-                onClick={() => setQuoteIndex(i)}
-                aria-label={`第 ${i + 1} 条`}
-                className={`h-0.5 rounded-full transition-all duration-500 ${
-                  i === quoteIndex
-                    ? "w-3 bg-indigo-500 dark:bg-indigo-400"
-                    : "w-0.5 bg-slate-300 dark:bg-slate-600 hover:bg-slate-400 dark:hover:bg-slate-500"
-                }`}
-              />
-            ))}
+
+          <div className="flex gap-3 flex-wrap justify-end">
+            {siteConfig.social?.github && (
+              <SocialBtn type="github" url={siteConfig.social.github} />
+            )}
+            {siteConfig.social?.gitee && (
+              <SocialBtn type="gitee" url={siteConfig.social.gitee} />
+            )}
+            {siteConfig.social?.email && (
+              <SocialBtn type="email" url={`mailto:${siteConfig.social.email}`} />
+            )}
+            {siteConfig.social?.qq && (
+              <SocialBtn type="qq" url={`tencent://message/?uin=${siteConfig.social.qq}`} />
+            )}
+            {siteConfig.social?.wechat && (
+              <SocialBtn type="wechat" />
+            )}
           </div>
         </div>
       </div>
