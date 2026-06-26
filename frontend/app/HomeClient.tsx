@@ -14,10 +14,14 @@ export default function HomeClient({
   postCount,
   chatterCount,
   photoCount,
+  projectCount,
+  pvCount,
 }: {
   postCount: number;
   chatterCount: number;
   photoCount: number;
+  projectCount: number;
+  pvCount: number;
 }) {
   return (
     <div className="w-full max-w-6xl mx-auto py-6 md:py-12 px-4 sm:px-10 relative z-10">
@@ -29,20 +33,20 @@ export default function HomeClient({
       </FadeIn>
 
       <main className="flex flex-col gap-4 md:gap-6 w-full">
-        {/* 第一行：个人信息 */}
+        {/* 第一行：个人信息 + 名言（合并在一个大卡片内） */}
         <FadeIn delay={0.1}>
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 w-full items-stretch">
-            <div className="md:col-span-12 flex w-full">
-              <ProfileCard
-                postCount={postCount}
-                chatterCount={chatterCount}
-                photoCount={photoCount}
-              />
-            </div>
+          <div className="w-full">
+            <ProfileCard
+              postCount={postCount}
+              chatterCount={chatterCount}
+              photoCount={photoCount}
+              projectCount={projectCount}
+              pvCount={pvCount}
+            />
           </div>
         </FadeIn>
 
-        {/* 第二行：照片墙 + 文章 + 说说 + 舔狗日记 */}
+        {/* 第二行：照片墙 + 文章 + 说说 */}
         <FadeIn delay={0.2}>
           <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 w-full items-stretch">
             <div className="md:col-span-4 h-full">
@@ -57,7 +61,7 @@ export default function HomeClient({
           </div>
         </FadeIn>
 
-        {/* 底部数据面板 */}
+        {/* 底部数据面板：运行时长 + 备案号 */}
         <FadeIn delay={0.25}>
           <div className="w-full">
             <SiteDashboard />
