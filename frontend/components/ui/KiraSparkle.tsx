@@ -52,20 +52,20 @@ export default function KiraSparkle() {
     ];
 
     const spawnAt = (x: number, y: number) => {
-      const count = 10 + Math.floor(Math.random() * 12);
+      const count = 18 + Math.floor(Math.random() * 14);
       for (let i = 0; i < count; i++) {
         const angle = Math.random() * Math.PI * 2;
-        const speed = 1.5 + Math.random() * 3;
-        const life = 30 + Math.random() * 50;
+        const speed = 2 + Math.random() * 4;
+        const life = 40 + Math.random() * 60;
         sparkles.current.push({
           x,
           y,
           vx: Math.cos(angle) * speed,
-          vy: Math.sin(angle) * speed - 2,
-          size: 2.5 + Math.random() * 4.5,
+          vy: Math.sin(angle) * speed - 2.5,
+          size: 3.5 + Math.random() * 6,
           opacity: 1,
           rotation: Math.random() * Math.PI * 2,
-          rotationSpeed: (Math.random() - 0.5) * 0.15,
+          rotationSpeed: (Math.random() - 0.5) * 0.2,
           color: colors[Math.floor(Math.random() * colors.length)],
           life,
           maxLife: life,
@@ -116,8 +116,8 @@ export default function KiraSparkle() {
         p.vy += 0.04;
         p.rotation += p.rotationSpeed;
         p.life--;
-        p.opacity = Math.max(0, (p.life / p.maxLife) * 0.9);
-        p.size *= 0.985;
+        p.opacity = Math.max(0, (p.life / p.maxLife));
+        p.size *= 0.99;
         return p.life > 0;
       });
 
@@ -160,7 +160,7 @@ export default function KiraSparkle() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 z-[9998] pointer-events-none"
+      className="fixed inset-0 z-[9999] pointer-events-none"
     />
   );
 }

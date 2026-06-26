@@ -36,8 +36,8 @@ export default function HomeClient({
       <main className="flex flex-col gap-4 md:gap-6 w-full">
         {/* 第一行：个人信息卡片 + 名言卡片 */}
         <FadeIn delay={0.1}>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 w-full">
-            <div className="md:col-span-2">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 w-full items-stretch">
+            <div className="md:col-span-2 h-full">
               <ProfileCard
                 postCount={postCount}
                 chatterCount={chatterCount}
@@ -46,7 +46,7 @@ export default function HomeClient({
                 pvCount={pvCount}
               />
             </div>
-            <div className="md:col-span-1 flex flex-col">
+            <div className="md:col-span-1 h-full">
               <QuoteCard />
             </div>
           </div>

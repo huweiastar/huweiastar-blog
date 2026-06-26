@@ -38,12 +38,12 @@ export const siteConfig = {
 
   // 社交链接
   social: {
-    github: "https://github.com/huweiastar/huweiastar-blog",
-    gitee: "https://gitee.com/hongzyh",
-    google: "mailto:guh982719@gmail.com",
-    email: "your.email@example.com",
-    qq: "123456789",
-    wechat: "your_wechat_id",
+    github: "",
+    gitee: "",
+    google: "",
+    email: "",
+    qq: "",
+    wechat: "",
   },
 
   // 站点信息

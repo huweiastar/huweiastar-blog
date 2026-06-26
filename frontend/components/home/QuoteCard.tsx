@@ -34,7 +34,7 @@ export default function QuoteCard() {
   const quote = QUOTES[quoteIndex];
 
   return (
-    <div className="rounded-3xl bg-white/40 dark:bg-slate-800/50 backdrop-blur-md border border-white/40 dark:border-white/10 shadow-xl p-5 md:p-6 transition-all duration-700 relative overflow-hidden">
+    <div className="rounded-3xl bg-white/40 dark:bg-slate-800/50 backdrop-blur-md border border-white/40 dark:border-white/10 shadow-xl p-5 md:p-6 transition-all duration-700 relative overflow-hidden h-full flex flex-col justify-center">
       <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-indigo-400/10 dark:bg-indigo-400/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative z-10 flex items-start gap-3">
